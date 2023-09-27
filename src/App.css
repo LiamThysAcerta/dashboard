@@ -1,0 +1,14 @@
+#root {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.card {
+  text-align: center;
+}
+
+.card-body {
+  text-align: left;
+}
