@@ -43,10 +43,7 @@ const ServerComponent: React.FC<{ server: string }> = ({ server }) => {
           (status?.status == 'UP' ? 'bg-success' : 'bg-danger')
         }
       >
-        <div className='card-header font-weight-bold font-4xl'>
-          {server}
-          <span className='float-right'> {status?.status}</span>
-        </div>
+        <div className='card-header font-weight-bold font-4xl'>{server}</div>
         <div className='card-body'>
           <div className='row'>
             <div className='col-4'>Version</div>
