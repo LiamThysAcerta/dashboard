@@ -1,5 +1,5 @@
-import { Project } from '@/classes/Project';
-import EnvironmentComponent from '@/components/Environment/EnvironmentComponent';
+import { Project } from '../../classes/Project';
+import EnvironmentComponent from '../Environment/EnvironmentComponent';
 
 const ProjectComponent: React.FC<{ project: Project }> = ({ project }) => {
   return (
