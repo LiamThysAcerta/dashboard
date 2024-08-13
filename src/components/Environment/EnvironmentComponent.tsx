@@ -12,10 +12,13 @@ const EnvironmentComponent: React.FC<{ environment: Environment }> = ({
         </div>
       </div>
       <div className='row'>
-        {environment.servers.map((server) => {
+        {environment.servers.map((container) => {
           return (
             <div className='col-sm-6 col-md-4'>
-              <ServerComponent server={server} />
+              <ServerComponent
+                environment={container.environment}
+                url={container.url}
+              />
             </div>
           );
         })}

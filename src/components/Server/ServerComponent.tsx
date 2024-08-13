@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react';
-import Status from '../../classes/Status';
-import axios from 'axios'; // Import axios if you're using it
-import { HealthResponse } from '../../classes/HealthResponse';
+import axios from 'axios';
+import { HealthResponse } from '@/classes/HealthResponse';
 
-const ServerComponent: React.FC<{ server: string }> = ({ server }) => {
-  const [status, setStatus] = useState<Status | null>(null);
+const ServerComponent: React.FC<{ environment: string; url: string }> = ({
+  environment,
+  url,
+}) => {
+  const [status, setStatus] = useState<HealthResponse | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get<HealthResponse>(
-          `http://${server}.global.dns:8080/AES/actuator/health`
-        );
+        let responeURL = `${url}`;
+
+        const response = await axios.get<HealthResponse>(responeURL);
 
         const statusData = responseToStatus(response.data);
 
@@ -22,9 +24,9 @@ const ServerComponent: React.FC<{ server: string }> = ({ server }) => {
     };
 
     fetchData();
-  }, [server]);
+  }, [url]);
 
-  const responseToStatus = (response: HealthResponse): Status => {
+  const responseToStatus = (response: HealthResponse): HealthResponse => {
     return {
       status: response.status,
       versionInfo: {
@@ -43,7 +45,9 @@ const ServerComponent: React.FC<{ server: string }> = ({ server }) => {
           (status?.status == 'UP' ? 'bg-success' : 'bg-danger')
         }
       >
-        <div className='card-header font-weight-bold font-4xl'>{server}</div>
+        <div className='card-header font-weight-bold font-4xl'>
+          {environment}
+        </div>
         <div className='card-body'>
           <div className='row'>
             <div className='col-4'>Version</div>
